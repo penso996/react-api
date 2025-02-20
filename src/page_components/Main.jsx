@@ -9,10 +9,9 @@ export default function Main() {
 
     // FUNCTION to handle API request
     function fetchBlogPost() {
-        axios.get("http://localhost:3000/posts")
-            .then((res) =>
-                setPosts(res.data)
-            )
+        return axios.get("http://localhost:3000/posts")
+            .then((res) => setPosts(res.data))
+            .catch((err) => console.error("Error fetching posts", err));
     }
 
     // fetch data once
@@ -29,7 +28,7 @@ export default function Main() {
                         <h3>{post.title}</h3>
                         <p>{post.content}</p>
                         <img src={post.image} alt={post.title} />
-                        <p>{post.tags}</p>
+                        <p>{post.tags.length === 1 ? post.tags[0] : post.tags.join(", ")}</p>
                     </div>
                 ))
             )}
