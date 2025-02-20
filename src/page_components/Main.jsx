@@ -1,60 +1,22 @@
 // Main.jsx
-import { useState } from "react";
-
-// Initial posts array
-const initialBlogPosts = [
-    {
-        id: 1,
-        title: "Introduzione a JavaScript",
-        author: "Mario Rossi",
-        content: "JavaScript è un linguaggio di programmazione utilizzato per creare interattività nei siti web.",
-        category: "Programmazione",
-        availability: true
-    },
-    {
-        id: 2,
-        title: "I benefici della meditazione",
-        author: "Laura Bianchi",
-        content: "La meditazione aiuta a ridurre lo stress e migliorare la concentrazione.",
-        category: "Benessere",
-        availability: true
-    },
-    {
-        id: 3,
-        title: "Viaggiare in Giappone: cosa sapere",
-        author: "Giovanni Verdi",
-        content: "Il Giappone offre un mix unico di tradizione e modernità. Ecco alcuni consigli per il tuo viaggio.",
-        category: "Viaggi",
-        availability: false
-    },
-    {
-        id: 4,
-        title: "Guida all'alimentazione sana",
-        author: "Chiara Neri",
-        content: "Una dieta equilibrata è essenziale per mantenere la salute e il benessere.",
-        category: "Salute",
-        availability: true
-    },
-    {
-        id: 5,
-        title: "Come migliorare la produttività",
-        author: "Stefano Gialli",
-        content: "Organizzare il tempo e ridurre le distrazioni può aumentare significativamente la produttività.",
-        category: "Crescita Personale",
-        availability: false
-    }
-];
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 export default function Main() {
 
     // useState to handle blogPosts
-    const [posts, setPosts] = useState(initialBlogPosts);
+    const [posts, setPosts] = useState([]);
 
-    // FUNCTION to remove a post from ID (utilized for the button)
-    function removePost(id) {
-        const updatedBlogPost = posts.filter(post => post.id !== id);
-        setPosts(updatedBlogPost);
+    // FUNCTION to handle API request
+    function fetchBlogPost() {
+        axios.get("http://localhost:3000/posts")
+            .then((res) =>
+                setPosts(res.data)
+            )
     }
+
+    // fetch data once
+    useEffect(fetchBlogPost, []);
 
     // RETURN
     return (
@@ -65,11 +27,9 @@ export default function Main() {
                 posts.map((post) => (
                     <div key={post.id}>
                         <h3>{post.title}</h3>
-                        <h5>{post.author}</h5>
                         <p>{post.content}</p>
-                        <h6>{post.category}</h6>
-                        <p>{post.availability === true ? "DISPONIBILE" : "NON DISPONIBILE"}</p>
-                        <button onClick={() => removePost(post.id)}>Delete</button>
+                        <img src={post.image} alt={post.title} />
+                        <p>{post.tags}</p>
                     </div>
                 ))
             )}
