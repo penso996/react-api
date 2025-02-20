@@ -9,7 +9,7 @@ export default function Main() {
 
     // FUNCTION to handle API request
     function fetchBlogPost() {
-        return axios.get("http://localhost:3000/posts")
+        axios.get("http://localhost:3000/posts")
             .then((res) => setPosts(res.data))
             .catch((err) => console.error("Error fetching posts", err));
     }
