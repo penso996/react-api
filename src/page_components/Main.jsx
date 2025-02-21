@@ -17,6 +17,7 @@ export default function Main() {
     // useState to handle form
     const [newPost, setNewPost] = useState(initialPostData);
 
+
     // FUNCTION to handle API request
     function fetchBlogPost() {
         axios.get("http://localhost:3000/posts")
@@ -26,6 +27,7 @@ export default function Main() {
 
     // fetch data once
     useEffect(fetchBlogPost, []);
+
 
     // FUNCTION to handle form data
     function handleFormData(e) {
@@ -40,6 +42,7 @@ export default function Main() {
         ));
     }
 
+
     // FUNCTION to handle form submission
     function handleSubmit(e) {
         e.preventDefault(); // prevent empty form
@@ -52,6 +55,7 @@ export default function Main() {
                 console.error("Error adding post", err);
             });
     }
+
 
     // RETURN
     return (
