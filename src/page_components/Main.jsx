@@ -45,8 +45,8 @@ export default function Main() {
         e.preventDefault(); // prevent empty form
         axios.post("http://localhost:3000/posts", newPost)
             .then((res) => {
-                setPosts((prevPosts) => [...prevPosts, res.data]);
-                setNewPost(initialPostData);
+                setPosts((prevPosts) => [...prevPosts, res.data]); // use setPost to create a new posts array
+                setNewPost(initialPostData);  // reset form
             })
             .catch(err => {
                 console.error("Error adding post", err);
