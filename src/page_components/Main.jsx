@@ -20,7 +20,7 @@ export default function Main() {
     // FUNCTION to handle API request
     function fetchBlogPost() {
         axios.get("http://localhost:3000/posts")
-            .then((res) => setPosts(res.data))
+            .then((res) => setPosts(res.data)) // use setPost function to create a new posts array
             .catch((err) => console.error("Error fetching posts", err));
     }
 
