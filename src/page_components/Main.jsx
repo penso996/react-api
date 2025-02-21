@@ -31,7 +31,7 @@ export default function Main() {
     function handleFormData(e) {
         // handle various inputs type
         const value = e.target.name === "tags" ? e.target.value.split(",") : e.target.value;
-        // use setFormData with form input
+        // use setNewForm with form input
         setNewPost((currentFormData) => (
             {
                 ...currentFormData,
